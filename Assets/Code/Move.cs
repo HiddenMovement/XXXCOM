@@ -4,7 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 
 
-public class Move : TargetedAbility
+public class Move : TargetLocationAbility
 {
     public int MoveCount = 0;
 

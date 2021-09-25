@@ -22,12 +22,27 @@ public class DefaultSerializableDictionary<T, U>
             base[t] = value;
         }
     }
+
+    public void Load(DefaultSerializableDictionary<T, U> other)
+    {
+        foreach (T key in other.Keys)
+            this[key] = other[key];
+    }
 }
 
-
 [Serializable]
-public class ItemDictionary : DefaultSerializableDictionary<Item, int> { }
+public class AttributeDictionary : DefaultSerializableDictionary<Attribute, int>
+{
+    public void Add(AttributeDictionary other)
+    {
+        foreach (Attribute attribute in other.Keys)
+            this[attribute] += other[attribute];
+    }
 
-[Serializable]
-public class AttributeDictionary : DefaultSerializableDictionary<Attribute, int> { }
+    public void Subtract(AttributeDictionary other)
+    {
+        foreach (Attribute attribute in other.Keys)
+            this[attribute] -= other[attribute];
+    }
+}
 

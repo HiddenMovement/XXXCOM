@@ -34,9 +34,9 @@ public class MoveAbilityUI : AbilityUI<Move>
 
     void GeneratePathVisualization()
     {
-        if (target_location == The.MapCursor.Location)
+        if (target_location == The.Floor.LocationPointedAt)
             return;
-        target_location = The.MapCursor.Location;
+        target_location = The.Floor.LocationPointedAt;
 
         bezier_lines_container.DestroyChildren();
 
@@ -71,7 +71,7 @@ public class MoveAbilityUI : AbilityUI<Move>
             location.Highlight.SetActive(
                 path != null &&
                 location != Critter.Location &&
-                moves_required <= Critter.Inventory[Item.ActionPoints]);
+                moves_required <= Critter.Entity.Attributes[Attribute.Energy]);
 
             int index = Ability.MoveCount + moves_required - 1;
             if (index >= HighlightMaterials.Count)

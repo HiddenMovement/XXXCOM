@@ -35,7 +35,7 @@ public class Triggers : MonoBehaviour
                 response => (response, trait.GetResponsePriority(response)));
         };
 
-        List<T> responses = Critter.Traits
+        List<T> responses = Critter.Entity.Traits
             .SelectMany(trait => GetResponsesAndPriorities(trait))
             .OrderBy(pair => pair.Priority)
             .Select(pair => pair.Response)

@@ -10,18 +10,21 @@ public class Trait : MonoBehaviour
     Dictionary<Delegate, int> responses = 
         new Dictionary<Delegate, int>();
 
-    public AttributeDictionary AttributesBonuses = new AttributeDictionary();
+    public AttributeDictionary Bonuses = new AttributeDictionary();
 
     public string Name;
     public string Description;
     public Sprite Icon;
 
-    public Traits Traits { get { return GetComponentInParent<Traits>(); } }
-    public Attributes Attributes { get { return GetComponentInParent<Attributes>(); } }
-    public Triggers Triggers { get { return Traits.GetComponent<Triggers>(); } }
+    public Entity Entity { get { return GetComponentInParent<Entity>(); } }
+    public Traits Traits { get { return Entity.Traits; } }
+    public Attributes Attributes { get { return Entity.Attributes; } }
+    public Triggers Triggers { get { return Entity.Triggers; } }
     public Resident Resident { get { return Traits.GetComponent<Resident>(); } }
     public Critter Critter { get { return Traits.GetComponent<Critter>(); } }
-    public Inventory Inventory { get { return Traits.GetComponent<Inventory>(); } }
+
+    public Status Status { get { return Traits.Status; } }
+    public Body Body { get { return Traits.Body; } }
 
     protected virtual void Start() { }
     protected virtual void Update() { }

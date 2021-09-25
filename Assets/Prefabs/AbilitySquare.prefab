@@ -19,9 +19,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3840943045878735276, guid: 354107c57c6b5bd4aafc2246af26189d, type: 3}
+      propertyPath: m_AspectMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3840943045878735282, guid: 354107c57c6b5bd4aafc2246af26189d, type: 3}
       propertyPath: m_Name
-      value: ActionSquare
+      value: AbilitySquare
       objectReference: {fileID: 0}
     - target: {fileID: 3840943045878735283, guid: 354107c57c6b5bd4aafc2246af26189d, type: 3}
       propertyPath: m_RootOrder
@@ -29,6 +33,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3840943045878735283, guid: 354107c57c6b5bd4aafc2246af26189d, type: 3}
       propertyPath: m_SizeDelta.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 3840943045878735283, guid: 354107c57c6b5bd4aafc2246af26189d, type: 3}
+      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3840943045878735283, guid: 354107c57c6b5bd4aafc2246af26189d, type: 3}

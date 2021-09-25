@@ -3,12 +3,9 @@ using UnityEditor;
 using System.Linq;
 using System.Collections.Generic;
 
-
+[RequireComponent(typeof(Entity))]
 [RequireComponent(typeof(Resident))]
 [RequireComponent(typeof(Obstacle))]
-[RequireComponent(typeof(Traits))]
-[RequireComponent(typeof(Mortal))]
-[RequireComponent(typeof(Inventory))]
 [RequireComponent(typeof(MoveController))]
 public class Critter : MonoBehaviour
 {
@@ -34,12 +31,8 @@ public class Critter : MonoBehaviour
 
     public Ability SelectedAbility { get; set; }
 
+    public Entity Entity { get { return GetComponent<Entity>(); } }
     public Resident Resident { get { return GetComponent<Resident>(); } }
-    public Traits Traits { get { return GetComponent<Traits>(); } }
-    public Attributes Attributes { get { return GetComponent<Attributes>(); } }
-    public Triggers Triggers { get { return GetComponent<Triggers>(); } }
-    public Mortal Mortal { get { return GetComponent<Mortal>(); } }
-    public Inventory Inventory { get { return GetComponent<Inventory>(); } }
     public MoveController MoveController { get { return GetComponent<MoveController>(); } }
 
     public IEnumerable<Ability> Abilities

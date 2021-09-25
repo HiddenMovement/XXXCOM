@@ -10,4 +10,9 @@ public class Resident : MonoBehaviour
         get { return GetComponentInParent<Location>(); }
         set { value.AddResident(this); }
     }
+
+    public bool HasLineOfSight(Resident other)
+    {
+        return true;
+    }
 }

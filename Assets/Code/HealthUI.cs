@@ -10,8 +10,8 @@ public class HealthUI : CritterUIElement
     {
         Text.text = 
             "HP: " + 
-            Critter.Mortal.CurrentHealth + 
+            Critter.Entity.Attributes[Attribute.Vitality] + 
             "/" + 
-            Critter.Mortal.MaxHealth;
+            Critter.Entity.Attributes.GetBaseValue(Attribute.Vitality);
     }
 }
