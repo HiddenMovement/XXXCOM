@@ -17,7 +17,6 @@ public static class The
     public static Map Map { get { return Directory.Map; } }
     public static TurnScheduler TurnScheduler { get { return Directory.TurnScheduler; } }
     public static Floor Floor { get { return Directory.Floor; } }
-    public static MapCursor MapCursor { get { return Directory.MapCursor; } }
     public static Transform ExpatContainersContainer { get { return Directory.ExpatContainersContainer; } }
 
 

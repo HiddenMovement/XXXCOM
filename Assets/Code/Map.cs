@@ -13,6 +13,9 @@ public class Map : MonoBehaviour
     public IEnumerable<Lane> Lanes
     { get { return GetComponentsInChildren<Lane>(); } }
 
+    public IEnumerable<Entity> Entities => GetComponentsInChildren<Entity>();
+    public IEnumerable<Critter> Critters => GetComponentsInChildren<Critter>();
+
     public Graph Graph
     {
         get

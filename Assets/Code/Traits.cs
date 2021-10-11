@@ -11,8 +11,8 @@ public class Traits : MonoBehaviour, IEnumerable<Trait>
     public IEnumerable<Ability> Abilities
     { get { return this.SelectComponents<Trait, Ability>(); } }
 
-    public Attributes Attributes { get { return GetComponent<Attributes>(); } }
-    public Triggers Triggers { get { return GetComponent<Triggers>(); } }
+    public Body Body { get { return Demand<Body>(); } }
+    public Status Status { get { return Demand<Status>(); } }
 
     public void AddTrait<T>(T trait) where T : Trait
     {
@@ -29,6 +29,18 @@ public class Traits : MonoBehaviour, IEnumerable<Trait>
     public T Get<T>() where T : Trait
     {
         return TraitsContainer.GetComponentInChildren<T>();
+    }
+
+    public T Demand<T>() where T : Trait
+    {
+        T trait = Get<T>();
+        if (trait == null)
+        {
+            trait = new GameObject(typeof(T).Name).AddComponent<T>();
+            trait.transform.SetParent(TraitsContainer);
+        }
+
+        return trait;
     }
 
     public IEnumerator<Trait> GetEnumerator()

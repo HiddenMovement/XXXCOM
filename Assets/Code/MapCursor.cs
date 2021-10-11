@@ -6,21 +6,34 @@ using System.Linq;
 [RequireComponent(typeof(Resident))]
 public class MapCursor : MonoBehaviour
 {
-    public Location Location { get { return Resident.Location; } }
+    Vector3 smooth_visualization_position;
 
-    public Resident Resident { get { return GetComponent<Resident>(); } }
+    public float AnimationSpeed = 1;
 
-    private void Update()
+    public GameObject Visualization;
+    public bool IsVisible
     {
-        Resident.Location = The.Floor.LocationPointedAt;
+        get { return Visualization.activeSelf; }
+        set { Visualization.SetActive(value); }
+    }
 
-        if(InputUtility.WasMouseLeftReleased)
-        {
-            Critter critter = Resident.Location.Residents
-                .SelectComponents<Resident, Critter>().FirstOrDefault();
+    public Location Location
+    {
+        get { return GetComponent<Resident>().Location; }
+        set { GetComponent<Resident>().Location = value; }
+    }
 
-            if (critter != null)
-                critter.IsSelected = true;
-        } 
+    protected virtual void Start()
+    {
+        Location = The.Map.Locations.First();
+    }
+
+    protected virtual void Update()
+    {
+        Visualization.transform.position = 
+        smooth_visualization_position = 
+            smooth_visualization_position.Lerped(
+                transform.position, 
+                AnimationSpeed * 8 * Time.deltaTime);
     }
 }

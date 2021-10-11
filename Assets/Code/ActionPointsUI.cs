@@ -11,6 +11,6 @@ public class ActionPointsUI : CritterUIElement
     {
         Text.text =
             "AP: " +
-            Critter.Inventory[Item.ActionPoints];
+            Critter.Entity.Attributes[Attribute.Energy];
     }
 }

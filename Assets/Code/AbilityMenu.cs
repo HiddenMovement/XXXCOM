@@ -7,26 +7,28 @@ public class AbilityMenu : CritterUIElement
 {
     public AbilitySquare AbilitySquarePrefab;
 
-    public RectTransform AbilitySquaresContainer,
-                         AbilitySquaresContainerContainer;
+    public Grid AbilitySquaresGrid;
+    public RectTransform AbilitySquaresGridContainer;
 
     public IEnumerable<AbilitySquare> AbilitySquares
-    { get { return AbilitySquaresContainer.GetComponentsInChildren<AbilitySquare>(); } }
+    { get { return AbilitySquaresGrid.GetComponentsInChildren<AbilitySquare>(); } }
 
     private void Start()
     {
-        foreach (Transform child in AbilitySquaresContainer)
+        foreach (Transform child in AbilitySquaresGrid.transform)
             Destroy(child.gameObject);
     }
 
     private void Update()
     {
-        float target_container_width =
-            Critter.Abilities.Count() *
-            AbilitySquarePrefab.RectTransform.sizeDelta.x;
+        int ability_count = Critter.Abilities.Count();
 
-        AbilitySquaresContainerContainer.sizeDelta =
-            AbilitySquaresContainerContainer.sizeDelta.XChangedTo(target_container_width);
+        float target_container_width =
+            ability_count * AbilitySquarePrefab.RectTransform.sizeDelta.x +
+            AbilitySquaresGrid.Margin * (ability_count - 1);
+
+        AbilitySquaresGridContainer.sizeDelta =
+            AbilitySquaresGridContainer.sizeDelta.XChangedTo(target_container_width);
 
 
         foreach (AbilitySquare ability_square in AbilitySquares.ToList())
@@ -41,7 +43,7 @@ public class AbilityMenu : CritterUIElement
             if (!abilities.Contains(ability))
             {
                 AbilitySquare ability_square = Instantiate(AbilitySquarePrefab);
-                ability_square.transform.SetParent(AbilitySquaresContainer);
+                ability_square.transform.SetParent(AbilitySquaresGrid.transform);
                 ability_square.Ability = ability;
             }
         }

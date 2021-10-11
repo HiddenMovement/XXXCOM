@@ -32,7 +32,7 @@ public class SquadTurn : Turn
         get
         {
             IEnumerable<Critter> active_critters = squad.Critters
-                .Where(critter => critter.Inventory[Item.ActionPoints] > 0);
+                .Where(critter => critter.Entity.Attributes[Attribute.Energy] > 0);
 
             return active_critters.Count() == 0;
         }
@@ -48,7 +48,7 @@ public class SquadTurn : Turn
         base.Begin();
 
         foreach (Critter critter in squad.Critters)
-            critter.Triggers.OnBeginTurn();
+            critter.Entity.Triggers.OnBeginTurn();
     }
 
     public override void End()
@@ -56,7 +56,7 @@ public class SquadTurn : Turn
         base.End();
 
         foreach (Critter critter in squad.Critters)
-            critter.Triggers.OnEndTurn();
+            critter.Entity.Triggers.OnEndTurn();
 
         The.TurnScheduler.Schedule(
             new SquadTurn(squad), 

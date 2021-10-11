@@ -9,7 +9,7 @@ public abstract class Ability : Trait
     public int Cost { get { return BaseCost * CostMultiplier; } }
 
     public virtual bool CanDo
-    { get { return Cost <= Inventory[Item.ActionPoints]; } }
+    { get { return Cost <= Attributes[Attribute.Energy]; } }
 
     public bool IsSelected
     {
@@ -25,7 +25,7 @@ public abstract class Ability : Trait
 
     public virtual void Do()
     {
-        Inventory[Item.ActionPoints] -= Cost;
+        Status.Lose(Attribute.Energy, Cost);
     }
 
     public bool TryDo()

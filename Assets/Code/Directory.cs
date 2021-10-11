@@ -15,6 +15,5 @@ public class Directory : MonoBehaviour
     public Map Map;
     public TurnScheduler TurnScheduler;
     public Floor Floor;
-    public MapCursor MapCursor;
     public Transform ExpatContainersContainer;
 }

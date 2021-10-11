@@ -11,6 +11,14 @@ public class Location : MonoBehaviour
     public GameObject Highlight;
     public Renderer HighlightRenderer;
 
+    public Entity Entity =>
+        ResidentsContainer.GetComponentInChildren<Entity>();
+    public bool ContainsEntity { get { return Entity != null; } }
+
+    public Critter Critter =>
+        ResidentsContainer.GetComponentInChildren<Critter>();
+    public bool ContainsCritter { get { return Critter != null; } }
+
     public Map Map
     { get { return GetComponentInParent<Map>(); } }
 
@@ -26,16 +34,8 @@ public class Location : MonoBehaviour
     public IEnumerable<Resident> Residents
     { get { return ResidentsContainer.GetComponentsInChildren<Resident>(); } }
 
-    public bool ContainsObstacle
-    {
-        get
-        {
-            IEnumerable<Resident> obstacles = Residents
-                .Where(resident => resident.HasComponent<Obstacle>());
-
-            return obstacles.Count() > 0;
-        }
-    }
+    public bool ContainsObstacle => 
+        ResidentsContainer.GetComponentInChildren<Obstacle>() != null;
 
     private void Update()
     {

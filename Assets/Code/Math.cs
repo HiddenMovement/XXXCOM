@@ -19,24 +19,17 @@ public static class MathUtility
         return (int)(Random.value* 0.999999f* count);
     }
 
-    public static T RandomElement<T>(this IEnumerable<T> enumerable)
+    public static T ChooseAtRandom<T>(this IEnumerable<T> elements, System.Func<T, float> GetWeight = null)
     {
-        List<T> list = new List<T>(enumerable);
+        if (GetWeight == null)
+            GetWeight = element => 1;
 
-        return list[RandomIndex(list.Count)];
-    }
-
-    public static T WeightedRandomElement<T>(this Dictionary<T, float> weighted_elements)
-    {
-        float total_weight = 0;
-        foreach (T element in weighted_elements.Keys)
-            total_weight += weighted_elements[element];
-
+        float total_weight = elements.Sum(element => GetWeight(element));
         float value = Random.value * total_weight;
 
-        foreach (T element in weighted_elements.Keys)
+        foreach (T element in elements)
         {
-            float weight = weighted_elements[element];
+            float weight = GetWeight(element);
 
             if (value <= weight)
                 return element;
@@ -47,25 +40,28 @@ public static class MathUtility
         return default(T);
     }
 
-    public static T WeightedRandomElement<T>(this IEnumerable<KeyValuePair<T, float>> weighted_elements)
-    {
-        return weighted_elements.ToDictionary(pair => pair.Key, pair => pair.Value)
-            .WeightedRandomElement();
-    }
-
-    public static T RemoveRandomElement<T>(List<T> list)
+    public static T RemoveRandomly<T>(List<T> list)
     {
         return list.TakeAt(RandomIndex(list.Count));
     }
 
-    public static bool Roll(float p)
+    public static int Roll(int sides)
     {
-        return Random.value > (1- p);
+        return Random.Range(0, sides);
     }
 
-    public static bool Flip()
+    public static bool Flip(float p = 0.5f)
     {
-        return Roll(0.5f);
+        return Random.value > (1 - p);
+    }
+
+    public static float WeightedAverage<T>(
+        this IEnumerable<T> elements, 
+        System.Func<T, float> GetValue, 
+        System.Func<T, float> GetWeight)
+    {
+        return elements.Sum(element => GetValue(element) * GetWeight(element)) / 
+               elements.Sum(element => GetWeight(element));
     }
 
     static float SimpleRecursiveLimit(float scale, int recursions_left)
@@ -237,6 +233,19 @@ public static class MathUtility
     public static int Round(this float value)
     {
         return RoundDown(value + 0.5f);
+    }
+
+    public static int RoundDown(this double value)
+    {
+        if (value >= 0)
+            return (int)value;
+        else
+            return (int)(value - 1);
+    }
+
+    public static int Round(this double value)
+    {
+        return RoundDown(value + 0.5);
     }
 
     public static Vector2 MakeUniformScale(float scale)
@@ -572,6 +581,34 @@ public static class MathUtility
 
         return bezier_path;
     }
+
+    public static bool Evaluate(this Comparison comparison, float a, float b)
+    {
+        switch(comparison)
+        {
+            case Comparison.Equal: return a == b;
+            case Comparison.LessThan: return a < b;
+            case Comparison.LessThanOrEqual: return a <= b;
+            case Comparison.GreaterThan: return a > b;
+            case Comparison.GreaterThanOrEqual: return a >= b;
+            default: return false;
+        }
+    }
+
+    public static bool Evaluate(this Comparison comparison, int a, int b)
+    {
+        return comparison.Evaluate((float)a, (float)b);
+    }
+
+
+    public static float Distance(this Transform transform, Transform other)
+    { return transform.position.Distance(other.transform.position); }
+
+    public static float Distance(this GameObject game_object, MonoBehaviour other)
+    { return game_object.transform.Distance(other.transform); }
+
+    public static float Distance(this MonoBehaviour component, MonoBehaviour other)
+    { return component.transform.Distance(other.transform); }
 }
 
 public abstract class GenericFunction<T>
@@ -823,4 +860,14 @@ public struct Sphere
         Point = point;
         Radius = radius;
     }
+}
+
+public enum Comparison
+{
+    None,
+    Equal,
+    GreaterThan,
+    GreaterThanOrEqual,
+    LessThan,
+    LessThanOrEqual
 }
