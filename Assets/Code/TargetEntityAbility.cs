@@ -18,7 +18,7 @@ public abstract class TargetEntityAbility : Ability
         {
             TargetCursor.IsVisible = true;
 
-            if (Target != null && InputUtility.WasMouseRightReleased)
+            if (Target != null && The.Floor.WasRightClicked)
                 TryDo();
         }
         else

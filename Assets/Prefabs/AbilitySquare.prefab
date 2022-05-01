@@ -28,6 +28,14 @@ PrefabInstance:
       value: AbilitySquare
       objectReference: {fileID: 0}
     - target: {fileID: 3840943045878735283, guid: 354107c57c6b5bd4aafc2246af26189d, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3840943045878735283, guid: 354107c57c6b5bd4aafc2246af26189d, type: 3}
+      propertyPath: m_Pivot.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3840943045878735283, guid: 354107c57c6b5bd4aafc2246af26189d, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}

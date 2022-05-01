@@ -11,6 +11,7 @@ using System.Linq.Expressions;
 
 public static class Utility
 {
+    //****NNNNNOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
     public static List<T> List<T>(params T[] elements)
     {
         return new List<T>(elements);
@@ -118,9 +119,9 @@ public static class Utility
         return list.ElementAtRelativeIndex(element, +1);
     }
 
-    public static T NextElement<T>(this IEnumerable<T> enumerable, T element)
+    public static T NextElement<T>(this IEnumerable<T> enumerable, T element) where T : class
     {
-        return enumerable.ToList().NextElement(element);
+        return enumerable.ToList().NextElement<T>(element);
     }
 
     public static T Take<T>(this List<T> list, T element)

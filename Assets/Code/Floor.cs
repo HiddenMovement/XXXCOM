@@ -3,8 +3,17 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+//****Rename to "World"?
 public class Floor : MonoBehaviour
 {
+    public bool IsTouched => !The.UI.IsTouched;
+
+    public bool WasLeftClicked => InputUtility.WasMouseLeftReleased && 
+                                  IsTouched;
+
+    public bool WasRightClicked => InputUtility.WasMouseRightReleased &&
+                                   IsTouched;
+
     public Vector3 PositionPointedAt
     {
         get

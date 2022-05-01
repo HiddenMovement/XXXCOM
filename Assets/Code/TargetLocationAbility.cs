@@ -17,7 +17,7 @@ public abstract class TargetLocationAbility : Ability
         {
             LocationCursor.IsVisible = true;
 
-            if(InputUtility.WasMouseRightReleased)
+            if (The.Floor.WasRightClicked)
                 TryDo();
         }
         else

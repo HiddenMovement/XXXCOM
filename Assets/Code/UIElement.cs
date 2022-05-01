@@ -2,13 +2,10 @@
 using System.Collections;
 
 [RequireComponent(typeof(ClickDetector))]
-public class UIElement : MonoBehaviour
+public class UIElement : RectElement
 {
     ClickDetector ClickDetector
     { get { return GetComponent<ClickDetector>(); } }
-
-    public RectTransform RectTransform
-    { get { return transform as RectTransform; } }
 
     public Vector2Int PixelPosition { get { return RectTransform.anchoredPosition.Round(); } }
 

@@ -222,3 +222,11 @@ public static class UIUtility
         return rect_transform.gameObject.IsTouched();
     }
 }
+
+[RequireComponent(typeof(RectTransform))]
+public class RectElement : MonoBehaviour
+{
+    public RectTransform RectTransform => transform as RectTransform;
+    public Rect Rect => RectTransform.rect;
+    public Vector2 SizeDelta => RectTransform.sizeDelta;
+}

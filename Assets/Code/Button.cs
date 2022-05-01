@@ -16,6 +16,8 @@ public class Button : UIElement
     public Color TouchColor = Color.white,
                  DownColor = Color.white;
 
+    public bool IsSelectable = true;
+
     public bool IsDown { get { return IsTouched && InputUtility.IsMouseLeftPressed; } }
 
     bool DontModifyImageSprite { get; set; }
@@ -39,7 +41,7 @@ public class Button : UIElement
 
     void Update()
     {
-        if (Image != null)
+        if (Image != null && IsSelectable)
         {
             if (!DontModifyImageSprite)
                 Image.sprite = GetDesiredSprite();
@@ -47,9 +49,7 @@ public class Button : UIElement
             Image.color = GetDesiredColor();
         }
 
-        if (gameObject.HasComponent<ClickDetector>() ?
-            WasClicked :
-            IsTouched && InputUtility.WasMouseLeftReleased)
+        if (IsSelectable && WasClicked)
             OnButtonUp.Invoke();
     }
 

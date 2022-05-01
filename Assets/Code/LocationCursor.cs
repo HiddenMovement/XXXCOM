@@ -6,10 +6,12 @@ public class LocationCursor : MapCursor
 {
     protected override void Update()
     {
-        Location = The.Floor.LocationPointedAt;
+        if(The.Floor.IsTouched)
+            Location = The.Floor.LocationPointedAt;
+
         base.Update();
 
-        if (InputUtility.WasMouseLeftReleased)
+        if (The.Floor.WasLeftClicked)
         {
             Critter critter = Location.Residents
                 .SelectComponents<Resident, Critter>().FirstOrDefault();
