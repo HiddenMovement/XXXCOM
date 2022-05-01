@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class Directory : MonoBehaviour
 {
     public Style Style;
-    public Canvas TacticalCanvas;
+    public Canvas Canvas;
     public UI UI;
     public GraphicRaycaster TacticalGraphicRaycaster;
     public PointerWatcher PointerWatcher;

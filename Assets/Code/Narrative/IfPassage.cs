@@ -31,7 +31,7 @@ public class IfPassage : Passage
         else
             toast_color = Color.red;
 
-        The.NarrativeUI.IfToaster.MakeToast(Hint(), toast_color);
+        The.NarrativeUI.Toaster.MakeToast(Hint(), toast_color);
     }
 
     public static IfPassage Make(Query<bool> Condition, 
@@ -98,7 +98,7 @@ public static class IfPassageExtensions
                 if (visit_passage != null)
                 {
                     //***naming
-                    string title = visit_passage.Title;
+                    string title = visit_passage.HeadingTitle;
                     if (title == null)
                         title = visit_passage.DesiredChapter.Title;
 
@@ -106,7 +106,7 @@ public static class IfPassageExtensions
                 }
                 if (miss_passage != null)
                 {
-                    string title = miss_passage.Title;
+                    string title = miss_passage.HeadingTitle;
                     if (title == null)
                         title = miss_passage.DesiredChapter.Title;
 

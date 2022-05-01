@@ -4,9 +4,7 @@ using System.Collections.Generic;
 using System;
 
 
-//****Should this (and IfPassage) not contain a nested Passage, instead always a TurnTo effect?
-//****"Choose"?
-[RequireComponent(typeof(TranslatedPassage))]
+[RequireComponent(typeof(TranslatorString))]
 public class ChoicePassage : Character.Passage
 {
     public List<Option> Options = new List<Option>();
@@ -26,7 +24,7 @@ public class ChoicePassage : Character.Passage
         }
     }
 
-    public TranslatedPassage MessagePassage => GetComponent<TranslatedPassage>();
+    public TranslatorString MessagePassage => GetComponent<TranslatorString>();
 
     public override void Read()
     {
@@ -48,14 +46,11 @@ public class ChoicePassage : Character.Passage
         return choice;
     }
 
-
-    public delegate string MessageQuery();//****Query<string>
-
     [Serializable]
     public class Option
     {
-        public MessageQuery Message;//Needs to use MessagePassage
-        public Query<string> Hint;//should this be a query?**** Message should be consistant with this (Query<string). "HintQuery?"
+        public TranslatorString Message;
+        public Query<string> Hint;
         public Passage Consequence;
         public Query<bool> Condition;
     }
@@ -68,7 +63,7 @@ public static class Suggest
     {
         return new ChoicePassage.Option
         {
-            Message = () => message,
+            Message = new TranslatorString(message),
             Hint = () => ""
         };
     }

@@ -2,8 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-//****make canvas accessible through this?
 public class UI : UIElement
 {
-
+    public Canvas Canvas => GetComponentInParent<Canvas>();
 }

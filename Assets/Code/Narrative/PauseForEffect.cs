@@ -1,7 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
-//****naming
 public class PauseForEffect : Passage
 {
     bool pause_has_begun = false;
@@ -57,11 +57,9 @@ public class PauseForEffect : Passage
 
 public static class PauseForEffectExtensions
 {
-    //****Something clever?
-    //****technically not accurate because we don't wait afterwards, we wait during
-    public static PauseForEffect AndWait(this Passage passage, 
-                                         float seconds_to_wait)
+    public static PauseForEffect ThenWait(this Passage passage, 
+                                          TimeSpan duration)
     {
-        return PauseForEffect.Make(seconds_to_wait, passage);
+        return PauseForEffect.Make((float)duration.TotalSeconds, passage);
     }
 }

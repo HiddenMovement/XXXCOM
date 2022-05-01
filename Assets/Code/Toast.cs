@@ -11,7 +11,7 @@ public class Toast : MonoBehaviour
     public Color Color;
 
     public float LifespanInSeconds = 5;
-    public float MarginInSeconds = 1.0f;//****
+    public float MarginInSeconds = 1.0f;
 
     public float DriftSpeed = 0.01f;
 

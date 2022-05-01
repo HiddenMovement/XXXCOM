@@ -4,7 +4,7 @@ using System.Collections;
 public class NavigationPassage : Passage
 {
     public Chapter DesiredChapter;
-    public string Title;
+    public string HeadingTitle;
 
     public override Passage NextPassage
     {
@@ -14,18 +14,18 @@ public class NavigationPassage : Passage
             if (chapter == null)
                 chapter = Chapter;
 
-            if (Title == null)
-                return chapter.StartPassage;
+            if (HeadingTitle == null)
+                return chapter.FirstPassage;
 
-            return chapter[Title];
+            return chapter[HeadingTitle];
         }
     }
 
-    public static NavigationPassage Make(string title = null, Chapter desired_chapter = null)
+    public static NavigationPassage Make(string heading_title = null, Chapter desired_chapter = null)
     {
         NavigationPassage locate_passage = Make<NavigationPassage>();
         locate_passage.DesiredChapter = desired_chapter;
-        locate_passage.Title = title;
+        locate_passage.HeadingTitle = heading_title;
 
         return locate_passage;
     }

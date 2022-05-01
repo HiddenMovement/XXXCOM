@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using UnityEngine;
 
 
@@ -16,8 +15,6 @@ public class Prop : MonoBehaviour
 
     public Toaster Toaster;
 
-    //****Is this really a "query"?
-    //****Also, consider private set, struct
     public class PropertyQuery
     {
         public Prop Prop;
@@ -108,8 +105,23 @@ public class Prop : MonoBehaviour
         public Prop Prop;
     }
 
-    public abstract class StatePassage : Passage
+    public class StatePassage : Passage//***naming
     {
+        public string Key, Value;
+
+        public StatePassage(string key, string value)
+        {
+            Key = key;
+            Value = value;
+        }
+
+        public override void Read()
+        {
+            base.Read();
+
+            Prop.State[Key] = Value;
+        }
+
         public override global::Passage NextPassage
         {
             get
@@ -130,7 +142,6 @@ public class Properties :
     DefaultSerializableDictionary<string, int>
 { }
 
-//****possibly generalize Charactistics and state?
 [Serializable]
 public class PropState :
     SerializableDictionary<string, string>
@@ -151,72 +162,30 @@ public class CharacterSprites :
 { }
 
 
-//****Move somewhere, reorganize this class generally
-//****if we could shorten these expressions a little, we could collpse them into 2 lines each
 public static class PropExtensions
 {
-    public static Prop.PropertyCondition IsEqualTo(
-        this Prop.PropertyQuery left, 
-        Query<int> right)
-    { 
-        return new Prop.PropertyCondition(left, Comparison.Equal, right); 
-    }
-    public static Prop.PropertyCondition IsEqualTo(
-        this Prop.PropertyQuery left, 
-        int right)
-    { 
-        return left.IsEqualTo(() => right); 
-    }
+    public static Prop.PropertyCondition IsEqualTo(this Prop.PropertyQuery left, Query<int> right)
+        => new Prop.PropertyCondition(left, Comparison.Equal, right);
+    public static Prop.PropertyCondition IsEqualTo(this Prop.PropertyQuery left, int right)
+        => left.IsEqualTo(() => right); 
 
-    public static Prop.PropertyCondition IsGreaterOrEqualTo(
-        this Prop.PropertyQuery left,
-        Query<int> right)
-    {
-        return new Prop.PropertyCondition(left, Comparison.GreaterThanOrEqual, right);
-    }
-    public static Prop.PropertyCondition IsGreaterOrEqualTo(
-        this Prop.PropertyQuery left,
-        int right)
-    {
-        return left.IsGreaterOrEqualTo(() => right);
-    }
+    public static Prop.PropertyCondition IsGreaterOrEqualTo(this Prop.PropertyQuery left, Query<int> right)
+        => new Prop.PropertyCondition(left, Comparison.GreaterThanOrEqual, right);
+    public static Prop.PropertyCondition IsGreaterOrEqualTo(this Prop.PropertyQuery left, int right)
+        => left.IsGreaterOrEqualTo(() => right);
 
-    public static Prop.PropertyCondition IsGreaterThan(
-        this Prop.PropertyQuery left,
-        Query<int> right)
-    {
-        return new Prop.PropertyCondition(left, Comparison.GreaterThan, right);
-    }
-    public static Prop.PropertyCondition IsGreaterThan(
-        this Prop.PropertyQuery left,
-        int right)
-    {
-        return left.IsGreaterThan(() => right);
-    }
+    public static Prop.PropertyCondition IsGreaterThan(this Prop.PropertyQuery left, Query<int> right)
+        => new Prop.PropertyCondition(left, Comparison.GreaterThan, right);
+    public static Prop.PropertyCondition IsGreaterThan(this Prop.PropertyQuery left, int right)
+        => left.IsGreaterThan(() => right);
 
-    public static Prop.PropertyCondition IsLessOrEqualTo(
-        this Prop.PropertyQuery left,
-        Query<int> right)
-    {
-        return new Prop.PropertyCondition(left, Comparison.LessThanOrEqual, right);
-    }
-    public static Prop.PropertyCondition IsLessOrEqualTo(
-        this Prop.PropertyQuery left,
-        int right)
-    {
-        return left.IsLessOrEqualTo(() => right);
-    }
+    public static Prop.PropertyCondition IsLessOrEqualTo( this Prop.PropertyQuery left, Query<int> right)
+        => new Prop.PropertyCondition(left, Comparison.LessThanOrEqual, right);
+    public static Prop.PropertyCondition IsLessOrEqualTo(this Prop.PropertyQuery left, int right)
+        => left.IsLessOrEqualTo(() => right);
 
-    public static Prop.PropertyCondition IsLessThan(
-        this Prop.PropertyQuery left,
-        Query<int> right)
-    {
-        return new Prop.PropertyCondition(left, Comparison.LessThan, right);
-    }
-    public static Prop.PropertyCondition IsLessThan(
-        this Prop.PropertyQuery left,
-        int right)
-    {
-        return left.IsLessThan(() => right);
-    }
+    public static Prop.PropertyCondition IsLessThan(this Prop.PropertyQuery left, Query<int> right)
+        => new Prop.PropertyCondition(left, Comparison.LessThan, right);
+    public static Prop.PropertyCondition IsLessThan(this Prop.PropertyQuery left, int right)
+        => left.IsLessThan(() => right);
 }

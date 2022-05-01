@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-//****maybe this is a generic animation Passage, and then we add "StandHerePassage"?
 public class MovePassage : Character.Passage
 {
     public StagePosition Origin, Destination;

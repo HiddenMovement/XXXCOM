@@ -3,22 +3,20 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-//****naming
-//****Need way to hide namebox when narrating. Also dynamic dialogbox height? Also fix shadow
 public class DialogBox : UIElement
 {
-    public SayPassage SayPassage;//****
+    public SayPassage SayPassage;
 
     public Text NameText, DialogText;
 
     public List<Image> Color0Images,
-                       Color1Images;//****naming
+                       Color1Images;//***naming
 
-    //****"DialogContainer" naming
     public RectTransform DialogContainer,
                          NameBox,
-                         QuotationMarksContainer;//****NameBox script?
-                         
+                         QuotationMarksContainer;
+
+    public bool HideNameBoxWhenNarrating = true;
 
     private void Update()
     {
@@ -29,6 +27,9 @@ public class DialogBox : UIElement
         }
         else
             DialogContainer.gameObject.SetActive(true);
+
+        if(HideNameBoxWhenNarrating)
+            NameBox.gameObject.SetActive(SayPassage.Character != null);
 
         Color color0 = Color.black;
         if(SayPassage.Character != null)
@@ -43,14 +44,14 @@ public class DialogBox : UIElement
         QuotationMarksContainer.gameObject
             .SetActive(SayPassage.Character != null);
 
-        //****Way to function just using a public MessagePAssage? Also ChoiceUI
-
         if (WasClicked)
             Hear();
     }
 
     public void Say(SayPassage narrative_passage)
     {
+        Debug.Log(narrative_passage.GetHashCode());
+
         SayPassage = narrative_passage;
 
         if (SayPassage.Character != null)
@@ -58,10 +59,9 @@ public class DialogBox : UIElement
         else
             NameText.text = "Narrator";
 
-        DialogText.text = SayPassage.MessagePassage.Message;
+        DialogText.text = SayPassage.Message.TranslatedString;
     }
 
-    //****See/Hear/Read... See seems the worst of the three. But "Read" is already taken and "Hear" is weird because its not actually spoken
     public void Hear()
     {
         SayPassage.HasBeenHeard = true;

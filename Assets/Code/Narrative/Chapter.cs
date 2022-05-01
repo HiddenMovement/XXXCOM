@@ -14,7 +14,7 @@ public partial class Chapter : MonoBehaviour
         transform.Children()
         .SelectComponents<Transform, Passage>();
 
-    public Passage StartPassage => Passages.First();
+    public Passage FirstPassage => Passages.First();
     public Passage this[string heading_title] =>
         Passages
         .SelectComponents<Passage, HeadingPassage>()

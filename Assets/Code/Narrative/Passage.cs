@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
+//***Do passages need to be scripts?
 public abstract class Passage : MonoBehaviour
 {
     public Chapter Chapter => GetComponentInParent<Chapter>();
@@ -15,7 +15,6 @@ public abstract class Passage : MonoBehaviour
     { return new GameObject(typeof(T).ToString()).AddComponent<T>(); }
 
 
-    //****naming? "Component"?
     public class Script : MonoBehaviour
     {
         public Passage Passage => GetComponent<Passage>();

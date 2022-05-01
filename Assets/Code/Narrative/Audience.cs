@@ -3,11 +3,11 @@ using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 
-
+//***naming
 public class Audience : MonoBehaviour
 {
-    SayPassage passage;//****naming
-    IEnumerable<string> Words => passage.MessagePassage.Message.Split(' ');
+    SayPassage say_passage;
+    IEnumerable<string> Words => say_passage.Message.TranslatedString.Split(' ');
     float AverageWordLength => (float)Words.Average(word => word.Length);
 
     float elapsed_seconds = 0;
@@ -15,10 +15,11 @@ public class Audience : MonoBehaviour
     [Range(0, 10)]
     public float WordsPerSecond = 2.5f;
     public float ExpectedAverageWordLength = 5;
+    public float MinimumSeconds = 2;
     public float Progress =>
         elapsed_seconds /
-        (AverageWordLength / ExpectedAverageWordLength) *
-        Words.Count() / WordsPerSecond;
+        (AverageWordLength / ExpectedAverageWordLength) /
+        (MinimumSeconds + Words.Count() / WordsPerSecond);
 
     public bool Manual = true;
     public bool Skip = false;
@@ -28,14 +29,17 @@ public class Audience : MonoBehaviour
 
     private void Update()
     {
-        if (Manual)
+        if (Manual || DialogBox.SayPassage == null)
             return;
 
-        if(passage != DialogBox.SayPassage)
+        if(say_passage != DialogBox.SayPassage)
         {
-            passage = DialogBox.SayPassage;
+            say_passage = DialogBox.SayPassage;
             elapsed_seconds = 0;
         }
+
+        if (Time.frameCount % 10 == 0)
+            Debug.Log(Progress.ToString());
 
         elapsed_seconds += Time.deltaTime;
         if (Progress >= 1 || Skip)

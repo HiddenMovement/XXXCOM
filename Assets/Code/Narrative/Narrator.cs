@@ -28,6 +28,4 @@ public class Narrator : MonoBehaviour
 
         IsReading = true;
     }
-
-    //****NarratePassage?
 }

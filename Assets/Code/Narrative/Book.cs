@@ -9,7 +9,7 @@ public class Book : MonoBehaviour
     Passage current_passage;
 
     public IEnumerable<Chapter> Chapters => GetComponentsInChildren<Chapter>();
-    public Chapter StartChapter => Chapters.First();//****naming
+    public Chapter FirstChapter => Chapters.First();
 
     public IEnumerable<Passage> Passages =>
         Chapters.SelectMany(chapter => chapter.Passages);
@@ -18,7 +18,7 @@ public class Book : MonoBehaviour
     {
         if (current_passage == null)
         {
-            current_passage = StartChapter.StartPassage;
+            current_passage = FirstChapter.FirstPassage;
 
             if(current_passage == null)
                 return;

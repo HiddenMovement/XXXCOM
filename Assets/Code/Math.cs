@@ -862,7 +862,6 @@ public struct Sphere
     }
 }
 
-//****More verbose?
 public enum Comparison
 {
     None,

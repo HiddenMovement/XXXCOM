@@ -38,10 +38,12 @@ public partial class Chapter
     }
 
 
-    protected NavigationPassage Read(string title)
-    { return NavigationPassage.Make(title, this); }
+    protected NavigationPassage Read(string heading_title)
+    { 
+        return NavigationPassage.Make(heading_title, this); 
+    }
 
-    protected NavigationPassage Read<T>(string title = null) where T : Chapter
+    protected NavigationPassage Read<T>(string heading_title = null) where T : Chapter
     {
         Chapter desired_chapter = Book.Chapters
             .FirstOrDefault(chapter_ => chapter_ is T);
@@ -50,6 +52,6 @@ public partial class Chapter
             throw new ArgumentException(
                 "Chapter " + typeof(T).ToString() +" not found.");
 
-        return NavigationPassage.Make(title, desired_chapter);
+        return NavigationPassage.Make(heading_title, desired_chapter);
     }
 }

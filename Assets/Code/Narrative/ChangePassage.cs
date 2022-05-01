@@ -1,13 +1,12 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-//****naming
 public class ChangePassage : Prop.Passage
 {
-    public string Property;//****"PropertyName", elsewhere
+    public string PropertyName;
 
     public Query<int> DeltaQuery;
-    public int Delta => DeltaQuery();//****needed? naming?
+    public int Delta => DeltaQuery();
 
     public string Hint
     {
@@ -20,7 +19,7 @@ public class ChangePassage : Prop.Passage
             else
                 hint += "-";
 
-            hint += Delta + " " + Property;
+            hint += Delta + " " + PropertyName;
 
             return hint;
         }
@@ -30,7 +29,7 @@ public class ChangePassage : Prop.Passage
     {
         base.Read();
 
-        Prop.Properties[Property] += DeltaQuery();
+        Prop.Properties[PropertyName] += DeltaQuery();
 
         Prop.Toaster.MakeToast(Hint, Prop.PrimaryColor);
     }
@@ -39,60 +38,60 @@ public class ChangePassage : Prop.Passage
 public static class ChangePassageExtensions
 {
     public static ChangePassage Gain(this Prop prop,
-                                     Query<int> value_query,//****deltaquery?
-                                     string property)
+                                     Query<int> delta_query,
+                                     string property_name)
     {
         ChangePassage change_passage = Passage.Make<ChangePassage>();
         change_passage.Prop = prop;
-        change_passage.DeltaQuery = value_query;
-        change_passage.Property = property;
+        change_passage.DeltaQuery = delta_query;
+        change_passage.PropertyName = property_name;
 
         return change_passage;
     }
     public static ChangePassage Gain(this Character character,
-                                     Query<int> value_query, 
-                                     string property)
-    { 
-        return character.Prop.Gain(value_query, property); 
+                                     Query<int> delta_query, 
+                                     string property_name)
+    {
+        return character.Prop.Gain(delta_query, property_name); 
     }
 
     public static ChangePassage Gain(this Prop prop,
-                                     int value,
-                                     string property)
+                                     int delta,
+                                     string property_name)
     { 
-        return prop.Gain(() => value, property); 
+        return prop.Gain(() => delta, property_name); 
     }
     public static ChangePassage Gain(this Character character,
-                                     int value,
-                                     string property)
+                                     int delta,
+                                     string property_name)
     { 
-        return character.Prop.Gain(value, property);
+        return character.Prop.Gain(delta, property_name);
     }
 
     public static ChangePassage Lose(this Prop prop,
-                                     Query<int> value_query,
-                                     string property)
+                                     Query<int> delta_query,
+                                     string property_name)
     { 
-        return prop.Gain(() => -value_query(), property); 
+        return prop.Gain(() => -delta_query(), property_name); 
     }
     public static ChangePassage Lose(this Character character,
-                                     Query<int> value_query,
-                                     string property)
+                                     Query<int> delta_query,
+                                     string property_name)
     { 
-        return character.Prop.Lose(value_query, property); 
+        return character.Prop.Lose(delta_query, property_name); 
     }
 
     public static ChangePassage Lose(this Prop prop,
-                                     int value,
-                                     string property)
+                                     int delta,
+                                     string property_name)
     {
-        return prop.Lose(() => value, property);
+        return prop.Lose(() => delta, property_name);
     }
     public static ChangePassage Lose(this Character character,
-                                     int value,
-                                     string property)
+                                     int delta,
+                                     string property_name)
     { 
-        return character.Prop.Lose(value, property); 
+        return character.Prop.Lose(delta, property_name); 
     }
 }
 

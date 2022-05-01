@@ -19,9 +19,9 @@ public class OptionButton : MonoBehaviour
         Button.TouchColor = color.Lerped(Color.white, 0.1f);
         Button.DownColor = color.Lerped(Color.black, 0.1f);
 
-        Text.text = Option.Message();//****no
+        Text.text = Option.Message.TranslatedString;
         if(Option.Condition != null)
-            Text.color = Option.Condition() ? Color.green ://****programmable?
+            Text.color = Option.Condition() ? Color.green :
                                               Color.red;
         Hint.text = Option.Hint();
 

@@ -52,7 +52,6 @@ public class ChoiceUI : MonoBehaviour
         }
     }
 
-    //****design
     public void Offer(ChoicePassage choice)
     {
         foreach (OptionButton option_button in OptionButtons)

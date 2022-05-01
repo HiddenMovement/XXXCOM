@@ -2,10 +2,9 @@
 using System.Collections;
 
 
-[RequireComponent(typeof(TranslatedPassage))]
 public class SayPassage : Character.Passage
 {
-    public TranslatedPassage MessagePassage => GetComponent<TranslatedPassage>();
+    public TranslatorString Message;
 
     public bool IsNarrator => Character == null;
 
@@ -26,7 +25,7 @@ public class SayPassage : Character.Passage
     {
         if (IsNarrator) ;
         else
-            MessagePassage.Translator = Character.Translator;
+            Message.Translator = Character.Translator;
 
     }
 
@@ -45,7 +44,7 @@ public static class SayPassageExtensions
     {
         SayPassage say = Passage.Make<SayPassage>();
         say.Character = character;
-        say.MessagePassage.RawMessage = dialog;
+        say.Message.RawString = dialog;
 
         return say;
     }
