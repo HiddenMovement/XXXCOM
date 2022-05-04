@@ -3,15 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-//****Do we really want to control position this way? More flexible to let characters control own position
-//****naming
+
 public class StagePosition : MonoBehaviour
 {
     public IEnumerable<Character> Characters => 
         GetComponentsInChildren<Character>();
 
-    //****abstract this first/last scheme (also used in ChoiceUI)
-    //****Should come with method to query lerped value based on index + population
     public Transform First, Last;
     public float AnimationSpeed = 1;
 

@@ -107,7 +107,7 @@ public static class MathUtility
     public static List<List<T>> Permute<T>(IEnumerable<T> enumerable)
     {
         if (enumerable.Count() == 1)
-            return Utility.List(new List<T>(enumerable));
+            return new List<List<T>> { enumerable.ToList() };
 
         List<List<T>> permutations= new List<List<T>>();
 
@@ -131,7 +131,7 @@ public static class MathUtility
     public static List<List<T>> Choose<T>(List<List<T>> options)
     {
         if (options.Count == 0)
-            return Utility.List(new List<T>());
+            return new List<List<T>> { new List<T>() };
 
         List<List<T>> remaining_options = new List<List<T>>(options);
         List<T> option = remaining_options.TakeAt(0);

@@ -16,7 +16,7 @@ public partial class Chapter
     protected SayPassage Narrate(string message)
     { return SayPassageExtensions.Say(null, message); }
 
-    protected ActionPassage Close()//***"CloseBook"?
+    protected ActionPassage CloseBook()
     { return Happen(() => The.Narrator.IsReading = false); }
 
     protected TravelPassage TravelTo(string destination)

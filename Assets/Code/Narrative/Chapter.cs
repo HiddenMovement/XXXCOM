@@ -6,7 +6,6 @@ using System;
 
 public partial class Chapter : MonoBehaviour
 {
-    //***naming clash with NavigationPassage
     public string Title => this.GetType().Name;
 
     public Book Book => GetComponentInParent<Book>();
@@ -47,5 +46,5 @@ public partial class Chapter : MonoBehaviour
     }
 
     protected virtual List<Passage> Write() 
-    { return new List<Passage> { Close() }; }
+    { return new List<Passage> { CloseBook() }; }
 }

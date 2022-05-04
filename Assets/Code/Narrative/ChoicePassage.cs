@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System;
 
 
-[RequireComponent(typeof(TranslatorString))]
 public class ChoicePassage : Character.Passage
 {
     public List<Option> Options = new List<Option>();
@@ -23,8 +22,6 @@ public class ChoicePassage : Character.Passage
             return ChosenOption.Consequence.NextPassage;
         }
     }
-
-    public TranslatorString MessagePassage => GetComponent<TranslatorString>();
 
     public override void Read()
     {

@@ -469,7 +469,7 @@ MonoBehaviour:
   DialogBox: {fileID: 1500886026}
   ChoiceUI: {fileID: 1712414209}
   Setting: {fileID: 2094176745}
-  Toaster: {fileID: 0}
+  Toaster: {fileID: 1879637604}
 --- !u!1001 &162141968
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -733,6 +733,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2301dbd63e3f9d145b2510a5e6e89aa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &222229712 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5674850267560294402, guid: fb0a64ae4554c4149a26f649bf5df32e, type: 3}
+  m_PrefabInstance: {fileID: 964802793}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &222494141
 GameObject:
   m_ObjectHideFlags: 0
@@ -2934,6 +2939,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1236700492}
     m_Modifications:
+    - target: {fileID: -6782054515867449806, guid: fb0a64ae4554c4149a26f649bf5df32e, type: 3}
+      propertyPath: A
+      value: 
+      objectReference: {fileID: 222229712}
+    - target: {fileID: -6782054515867449806, guid: fb0a64ae4554c4149a26f649bf5df32e, type: 3}
+      propertyPath: B
+      value: 
+      objectReference: {fileID: 1541567875}
+    - target: {fileID: -6782054515867449806, guid: fb0a64ae4554c4149a26f649bf5df32e, type: 3}
+      propertyPath: AnimationSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5705898311483144076, guid: fb0a64ae4554c4149a26f649bf5df32e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3906,7 +3923,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -14}
-  m_SizeDelta: {x: 804.80005, y: 189}
+  m_SizeDelta: {x: 809, y: 189}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1220075877
 MonoBehaviour:
@@ -5456,6 +5473,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &1541567875 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8296340768823051703, guid: fb0a64ae4554c4149a26f649bf5df32e, type: 3}
+  m_PrefabInstance: {fileID: 964802793}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1552391043
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7048,6 +7070,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 322691001045159425, guid: 629b11d91b0a6804f97d055babadd462, type: 3}
   m_PrefabInstance: {fileID: 75426104}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1879637604 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5516503775693497850, guid: 629b11d91b0a6804f97d055babadd462, type: 3}
+  m_PrefabInstance: {fileID: 75426104}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df9bb4c57dda9cf41982e41d6304f30f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1910933304
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7535,6 +7568,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1236700492}
     m_Modifications:
+    - target: {fileID: -6782054515867449806, guid: fb0a64ae4554c4149a26f649bf5df32e, type: 3}
+      propertyPath: AnimationSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5705898311483144076, guid: fb0a64ae4554c4149a26f649bf5df32e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

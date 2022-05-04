@@ -34,7 +34,7 @@ public static class CharacterExtensions
     {
         return ChoicePassage.Make(
             character,
-            Utility.List(option0, option1));
+            new List<ChoicePassage.Option> { option0, option1 });
     }
 
     public static ChoicePassage Choose(this Character character,
@@ -44,7 +44,7 @@ public static class CharacterExtensions
     {
         return ChoicePassage.Make(
             character,
-            Utility.List(option0, option1, option2));
+            new List<ChoicePassage.Option> { option0, option1, option2 });
     }
 
     public static ChoicePassage Choose(this Character character,
@@ -55,7 +55,7 @@ public static class CharacterExtensions
     {
         return ChoicePassage.Make(
             character,
-            Utility.List(option0, option1, option2, option3));
+            new List<ChoicePassage.Option> { option0, option1, option2, option3 });
     }
 
     public static ChoicePassage Choose(this Character character,
@@ -67,7 +67,7 @@ public static class CharacterExtensions
     {
         return ChoicePassage.Make(
             character,
-            Utility.List(option0, option1, option2, option3, option4));
+            new List<ChoicePassage.Option> { option0, option1, option2, option3, option4 });
     }
 }
 

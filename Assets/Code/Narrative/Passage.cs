@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-//***Do passages need to be scripts?
 public abstract class Passage : MonoBehaviour
 {
     public Chapter Chapter => GetComponentInParent<Chapter>();

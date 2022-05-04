@@ -104,36 +104,6 @@ public class Prop : MonoBehaviour
     {
         public Prop Prop;
     }
-
-    public class StatePassage : Passage//***naming
-    {
-        public string Key, Value;
-
-        public StatePassage(string key, string value)
-        {
-            Key = key;
-            Value = value;
-        }
-
-        public override void Read()
-        {
-            base.Read();
-
-            Prop.State[Key] = Value;
-        }
-
-        public override global::Passage NextPassage
-        {
-            get
-            {
-                if (Prop.HasComponent<PropVisualization>() &&
-                    Prop.GetComponent<PropVisualization>().IsTransitioning)
-                    return null;
-
-                return base.NextPassage;
-            }
-        }
-    }
 }
 
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-public static class Conversions//***Naming
+public static class TimeSpanExtensions
 {
     public static TimeSpan Milliseconds(this int milliseconds) => TimeSpan.FromMilliseconds(milliseconds);
     public static TimeSpan Seconds(this int seconds) => TimeSpan.FromSeconds(seconds);

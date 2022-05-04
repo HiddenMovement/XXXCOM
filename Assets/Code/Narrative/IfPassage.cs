@@ -60,7 +60,8 @@ public static class IfPassageExtensions
     {
         if_passage.TrueConsequence = consequence;
 
-        //***Not polymorphic, also this doesn't get set if the Otherwise is a navigation passage
+        // TODO : Polymorphism
+        // TODO : Handle case where Otherwise is a NavigationPassage
         if (consequence is NavigationPassage)
         {
             NavigationPassage navigation_passage = 
@@ -97,7 +98,6 @@ public static class IfPassageExtensions
 
                 if (visit_passage != null)
                 {
-                    //***naming
                     string title = visit_passage.HeadingTitle;
                     if (title == null)
                         title = visit_passage.DesiredChapter.Title;
@@ -123,14 +123,6 @@ public static class IfPassageExtensions
         return if_passage;
     }
 
-    //***Just make users use a "Do"?
-    //***Where to store nested Passages? How to? Should we?
-    public static IfPassage Then(this IfPassage if_passage,
-                                 System.Action consequence)
-    {
-        return if_passage.Then(ActionPassage.Make(consequence));
-    }
-
     public static IfPassage Otherwise(this IfPassage if_passage,
                                       Passage consequence)
     {
@@ -140,11 +132,5 @@ public static class IfPassageExtensions
             consequence.transform.SetParent(if_passage.transform);
 
         return if_passage;
-    }
-
-    public static IfPassage Otherwise(this IfPassage if_passage,
-                                      System.Action consequence)
-    {
-        return if_passage.Otherwise(ActionPassage.Make(consequence));
     }
 }

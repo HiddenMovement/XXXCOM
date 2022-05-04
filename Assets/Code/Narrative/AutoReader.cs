@@ -3,8 +3,7 @@ using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 
-//***naming
-public class Audience : MonoBehaviour
+public class AutoReader : MonoBehaviour
 {
     SayPassage say_passage;
     IEnumerable<string> Words => say_passage.Message.TranslatedString.Split(' ');
@@ -37,9 +36,6 @@ public class Audience : MonoBehaviour
             say_passage = DialogBox.SayPassage;
             elapsed_seconds = 0;
         }
-
-        if (Time.frameCount % 10 == 0)
-            Debug.Log(Progress.ToString());
 
         elapsed_seconds += Time.deltaTime;
         if (Progress >= 1 || Skip)

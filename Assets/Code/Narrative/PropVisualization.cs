@@ -12,12 +12,12 @@ public class PropVisualization : MonoBehaviour
     public CharacterSprites Sprites;
     public Sprite DefaultSprite;
 
-    public bool IsTransitioning { get; private set; }//****naming
+    public bool IsTransitioning { get; private set; }
     public Image TransitionImage;
     public enum AnimationType { None, Dissolve, Slide }
     public AnimationType Animation;
-    public RectMask2D Mask, AntiMask;//****"AntiMask"
-    public Transform FullyMaskedPosition;
+    public RectMask2D Mask, AntiMask;
+    public Transform MaskRestPosition;
     public float AnimationLength = 1;
     float ElapsedSeconds = 0;
 
@@ -25,43 +25,46 @@ public class PropVisualization : MonoBehaviour
     public PropState State => Prop.State;
 
 
-    //****refactor/abstract
     private void Update()
     {
         Sprite target_sprite;
+
+
+        // Select target_sprite
 
         IEnumerable<PropState> matching_states =
         Sprites.Keys.Where(state_ =>
         {
             foreach (string key in state_.Keys)
-                if (State.ContainsKey(key) && 
-                    State[key] != state_[key])
+                if (State.ContainsKey(key) && State[key] != state_[key])
                     return false;
 
             return true;
         });
 
-        var scored_states =
-            matching_states
-            .Select(state =>
-            {
-                (PropState State, int MatchCount) pair =
-                    (state, State.Intersect(state).Count());
-                return pair;
-            })
-            .Where(pair => pair.MatchCount > 0);
+        var scored_states = matching_states.Select(
+        state =>
+        {
+            (PropState State, int MatchCount) pair =
+                (state, State.Intersect(state).Count());
+            
+            return pair;
+        })
+        .Where(pair => pair.MatchCount > 0);
 
         if (scored_states.Count() > 0)
         {
-            PropState closest_state =
-                scored_states
-                .MaxElement(pair => pair.MatchCount)
-                .State;
+            PropState closest_state = scored_states
+                                     .MaxElement(pair => pair.MatchCount)
+                                     .State;
 
             target_sprite = Sprites[closest_state];
         }
         else
             target_sprite = DefaultSprite;
+
+
+        // Animate sprite transition
 
         if (target_sprite != Image.sprite)
         {
@@ -76,11 +79,9 @@ public class PropVisualization : MonoBehaviour
                 }
                 else if (TransitionImage.color.a < 0.98f)
                 {
-                    float target_alpha =
-                        Mathf.Lerp(TransitionImage.color.a, 1, 4 * Time.deltaTime);
+                    float target_alpha = Mathf.Lerp(TransitionImage.color.a, 1, 4 * Time.deltaTime);
 
-                    TransitionImage.color =
-                        TransitionImage.color.AlphaChangedTo(target_alpha);
+                    TransitionImage.color = TransitionImage.color.AlphaChangedTo(target_alpha);
                 }
                 else
                 {
@@ -93,24 +94,21 @@ public class PropVisualization : MonoBehaviour
                 if (TransitionImage.sprite != target_sprite)
                 {
                     TransitionImage.sprite = target_sprite;
-                    Mask.transform.position = FullyMaskedPosition.position;
+                    Mask.transform.position = MaskRestPosition.position;
                     ElapsedSeconds = 0;
                 }
                 else if (ElapsedSeconds < AnimationLength)
                 {
                     ElapsedSeconds += Time.deltaTime;
 
-                    Mask.transform.position = Vector3.Lerp(
-                        FullyMaskedPosition.position,
-                        transform.position,
-                        Mathf.Min(ElapsedSeconds / AnimationLength, 1));
+                    Mask.transform.position = Vector3.Lerp(MaskRestPosition.position, transform.position,
+                                                           Mathf.Min(ElapsedSeconds / AnimationLength, 1));
                     AntiMask.transform.position = Mask.transform.position + 
                                                   new Vector3(0, 2);
                 }
                 else
                 {
-                    Mask.transform.position = AntiMask.transform.position =
-                        FullyMaskedPosition.position; //Better name... "MaskRestPosition"
+                    Mask.transform.position = AntiMask.transform.position = MaskRestPosition.position;
 
                     Image.sprite = target_sprite;
                     IsTransitioning = false;
@@ -124,7 +122,7 @@ public class PropVisualization : MonoBehaviour
         }
         else
             Image.transform.position = transform.position;
-        TransitionImage.gameObject.SetActive(IsTransitioning);//****inelegant
+        TransitionImage.gameObject.SetActive(IsTransitioning);
 
 
         Image.transform.position = transform.position;

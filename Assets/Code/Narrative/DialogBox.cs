@@ -10,7 +10,7 @@ public class DialogBox : UIElement
     public Text NameText, DialogText;
 
     public List<Image> Color0Images,
-                       Color1Images;//***naming
+                       Color1Images;
 
     public RectTransform DialogContainer,
                          NameBox,
@@ -50,8 +50,6 @@ public class DialogBox : UIElement
 
     public void Say(SayPassage narrative_passage)
     {
-        Debug.Log(narrative_passage.GetHashCode());
-
         SayPassage = narrative_passage;
 
         if (SayPassage.Character != null)

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-//****naming
 [ExecuteAlways]
 public class RelativeSizer : MonoBehaviour
 {

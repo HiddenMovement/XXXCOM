@@ -11,12 +11,6 @@ using System.Linq.Expressions;
 
 public static class Utility
 {
-    //****NNNNNOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-    public static List<T> List<T>(params T[] elements)
-    {
-        return new List<T>(elements);
-    }
-
     public static List<T> List<T>(T first, Func<T, T> next_function)
     {
         List<T> list = new List<T>();
@@ -423,7 +417,7 @@ public static class Utility
         if (Mathf.Abs(value) < 1)
             return value.ToString("C2");
 
-        List<string> scale_suffixes = Utility.List("", "K", "M", "B", "T");
+        List<string> scale_suffixes = new List<string> { "", "K", "M", "B", "T" };
 
         int power = Mathf.Log(Mathf.Abs(value), 1000).RoundDown();
         if (power >= scale_suffixes.Count)

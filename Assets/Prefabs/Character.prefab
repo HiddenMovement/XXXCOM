@@ -237,6 +237,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1180306469969621751, guid: 49d529ec81abd0843b5ccd88edda641a, type: 3}
+      propertyPath: m_Name
+      value: MaskRestPosition
+      objectReference: {fileID: 0}
     - target: {fileID: 2376233633774081183, guid: 49d529ec81abd0843b5ccd88edda641a, type: 3}
       propertyPath: Animation
       value: 2
@@ -249,6 +253,10 @@ PrefabInstance:
       propertyPath: AnimationLength
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2376233633774081183, guid: 49d529ec81abd0843b5ccd88edda641a, type: 3}
+      propertyPath: MaskRestPosition
+      value: 
+      objectReference: {fileID: 413505246949211119}
     - target: {fileID: 3723224947374237322, guid: 49d529ec81abd0843b5ccd88edda641a, type: 3}
       propertyPath: Name
       value: Name
@@ -323,5 +331,10 @@ GameObject:
 --- !u!224 &8495487218422865917 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 249997247991703406, guid: 49d529ec81abd0843b5ccd88edda641a, type: 3}
+  m_PrefabInstance: {fileID: 8547308386426402963}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &413505246949211119 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8296531450979894140, guid: 49d529ec81abd0843b5ccd88edda641a, type: 3}
   m_PrefabInstance: {fileID: 8547308386426402963}
   m_PrefabAsset: {fileID: 0}
